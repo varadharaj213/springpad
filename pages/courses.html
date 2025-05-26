@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Courses - SpringPad AI Trading Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #ffd700;
+            --primary-blue: #4a9eff;
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-light: #cccccc;
+            --gradient-gold: linear-gradient(135deg, #ffd700, #ffed4e);
+            --gradient-blue: linear-gradient(135deg, #4a9eff, #0066cc);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark-bg);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles */
+        .navbar-custom {
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-radius: 50px;
+            margin: 20px auto;
+            max-width: 95%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--gradient-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 18px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #ffffff !important;
+            font-weight: 500;
+            margin: 0 15px;
+            padding: 10px 20px !important;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--primary-gold) !important;
+        }
+
+        .btn-login {
+            background: var(--gradient-gold);
+            color: #000 !important;
+            padding: 10px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            padding: 150px 0 80px;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Course Sections */
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        /* Course Cards */
+        .course-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-gold);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .course-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .course-level {
+            background: var(--gradient-blue);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .course-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .course-description {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .course-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .course-features li {
+            padding: 5px 0;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+        }
+
+        .course-features li i {
+            color: var(--primary-gold);
+            margin-right: 10px;
+            width: 16px;
+        }
+
+        .course-price {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+        }
+
+        .btn-enroll {
+            background: var(--gradient-blue);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            border: none;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .btn-enroll:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(74, 158, 255, 0.3);
+        }
+
+        /* AI Features Section */
+        .ai-features {
+            background: #111111;
+        }
+
+        .ai-feature-item {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .ai-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            color: #000;
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            height: 100%;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 24px;
+            color: #000;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 32px;
+            }
+            
+            .section-padding {
+                padding: 60px 0;
+            }
+            
+            .course-card {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <div class="brand-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                SPRINGPAD
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="courses.html">Stock Market Using AI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                </ul>
+                
+                <button class="btn btn-login" onclick="window.location.href='login.html'">
+                    Login
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">AI-Powered Stock Market Courses</h1>
+            <p class="page-subtitle">
+                Master the art of trading with our comprehensive AI-driven curriculum designed to transform beginners into successful traders
+            </p>
+        </div>
+    </section>
+
+    <!-- Course Categories -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Choose Your Learning Path</h2>
+                <p class="section-subtitle">Structured courses designed for every skill level</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                    <div class="course-card">
+                        <span class="course-level">Beginner</span>
+                        <h3 class="course-title">Stock Market Fundamentals with AI</h3>
+                        <p class="course-description">
+                            Perfect for beginners who want to understand stock market basics enhanced with AI-powered insights and predictions.
+                        </p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Market Basics & Terminology</li>
+                            <li><i class="fas fa-check"></i> AI-Powered Stock Analysis</li>
+                            <li><i class="fas fa-check"></i> Risk Management Fundamentals</li>
+                            <li><i class="fas fa-check"></i> 20+ Live Sessions</li>
+                            <li><i class="fas fa-check"></i> Practice Portfolio</li>
+                            <li><i class="fas fa-check"></i> Certificate of Completion</li>
+                        </ul>
+                        <div class="course-price">₹1,999</div>
+                        <button class="btn btn-enroll">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                    <div class="course-card">
+                        <span class="course-level" style="background: var(--gradient-gold); color: #000;">Intermediate</span>
+                        <h3 class="course-title">Advanced AI Trading Strategies</h3>
+                        <p class="course-description">
+                            Take your trading to the next level with advanced AI algorithms, technical analysis, and automated trading systems.
+                        </p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Advanced Technical Analysis</li>
+                            <li><i class="fas fa-check"></i> AI Algorithm Development</li>
+                            <li><i class="fas fa-check"></i> Automated Trading Bots</li>
+                            <li><i class="fas fa-check"></i> 30+ Live Sessions</li>
+                            <li><i class="fas fa-check"></i> 1-on-1 Mentoring</li>
+                            <li><i class="fas fa-check"></i> Real Trading Projects</li>
+                        </ul>
+                        <div class="course-price">₹4,999</div>
+                        <button class="btn btn-enroll">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                    <div class="course-card">
+                        <span class="course-level" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: white;">Expert</span>
+                        <h3 class="course-title">Professional AI Trading Mastery</h3>
+                        <p class="course-description">
+                            Become a professional trader with institutional-level AI tools, advanced portfolio management, and market psychology.
+                        </p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Institutional Trading Methods</li>
+                            <li><i class="fas fa-check"></i> AI Portfolio Optimization</li>
+                            <li><i class="fas fa-check"></i> Market Psychology & Sentiment</li>
+                            <li><i class="fas fa-check"></i> 50+ Live Sessions</li>
+                            <li><i class="fas fa-check"></i> Personal Trading Coach</li>
+                            <li><i class="fas fa-check"></i> Job Placement Assistance</li>
+                        </ul>
+                        <div class="course-price">₹9,999</div>
+                        <button class="btn btn-enroll">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Features -->
+    <section class="ai-features section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">AI-Powered Learning Features</h2>
+                <p class="section-subtitle">Experience the future of trading education</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 fade-in">
+                    <div class="ai-feature-item">
+                        <div class="ai-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h4>Smart Analytics</h4>
+                        <p style="color: var(--text-light);">AI analyzes your learning progress and suggests personalized improvement strategies.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 fade-in">
+                    <div class="ai-feature-item">
+                        <div class="ai-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Real-time Predictions</h4>
+                        <p style="color: var(--text-light);">Get live market predictions and trade recommendations during your learning sessions.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 fade-in">
+                    <div class="ai-feature-item">
+                        <div class="ai-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h4>AI Trading Assistant</h4>
+                        <p style="color: var(--text-light);">Your personal AI assistant helps you practice trades and provides instant feedback.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 fade-in">
+                    <div class="ai-feature-item">
+                        <div class="ai-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4>Adaptive Learning</h4>
+                        <p style="color: var(--text-light);">Course content adapts to your learning style and pace for maximum effectiveness.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Student Success Stories</h2>
+                <p class="section-subtitle">Hear from our successful graduates</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h5>Rajesh Kumar</h5>
+                        <p style="color: var(--primary-gold); margin-bottom: 15px;">300% Portfolio Growth</p>
+                        <p style="color: var(--text-light);">
+                            "SpringPad's AI-powered courses transformed my trading completely. I went from losing money to consistent profits in just 3 months!"
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h5>Priya Sharma</h5>
+                        <p style="color: var(--primary-gold); margin-bottom: 15px;">IT Professional → Day Trader</p>
+                        <p style="color: var(--text-light);">
+                            "The AI tools are incredible! I learned more in 2 months than I did in 2 years of self-study. Now I trade professionally."
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h5>Amit Patel</h5>
+                        <p style="color: var(--primary-gold); margin-bottom: 15px;">₹50L+ Annual Returns</p>
+                        <p style="color: var(--text-light);">
+                            "The expert course gave me institutional-level knowledge. I'm now managing a portfolio worth crores!"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-padding" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); text-align: center;">
+        <div class="container">
+            <div class="fade-in">
+                <h2 class="section-title">Ready to Start Your Trading Journey?</h2>
+                <p class="section-subtitle" style="margin-bottom: 40px;">
+                    Join thousands of successful traders who transformed their financial future with AI
+                </p>
+                <button class="btn" style="background: var(--gradient-gold); color: #000; padding: 15px 40px; border-radius: 50px; font-size: 18px; font-weight: 600; border: none;" onclick="window.location.href='register.html'">
+                    Start Learning Today
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0.2s';
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Enroll button functionality
+        document.querySelectorAll('.btn-enroll').forEach(button => {
+            button.addEventListener('click', function() {
+                const courseTitle = this.closest('.course-card').querySelector('.course-title').textContent;
+                alert(`Enrollment for "${courseTitle}" will be available after user registration system is implemented.`);
+            });
+        });
+    </script>
+</body>
+</html>
