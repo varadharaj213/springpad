@@ -1,0 +1,47 @@
+springpad-stock/
+├── index.html                 # Landing page
+├── assets/
+│   ├── css/
+│   │   ├── style.css         # Main stylesheet
+│   │   └── responsive.css    # Mobile responsiveness
+│   ├── js/
+│   │   ├── main.js          # Main JavaScript functionality
+│   │   ├── auth.js          # Authentication handling
+│   │   └── dashboard.js     # Dashboard functionality
+│   ├── images/
+│   │   ├── logo.png         # SpringPad logo
+│   │   ├── hero-bg.jpg      # Hero section background
+│   │   └── icons/           # Various icons
+│   └── fonts/               # Custom fonts if needed
+├── pages/
+│   ├── about.html           # About Us page
+│   ├── contact.html         # Contact page
+│   ├── login.html           # Login page
+│   ├── register.html        # Registration page
+│   ├── dashboard.html       # Student dashboard
+│   ├── courses.html         # Course listing
+│   └── profile.html         # User profile
+├── admin/
+│   ├── index.html           # Admin dashboard
+│   ├── manage-users.html    # User management
+│   ├── manage-courses.html  # Course management
+│   └── analytics.html       # Analytics page
+├── api/
+│   ├── config/
+│   │   └── database.php     # Database configuration
+│   ├── auth/
+│   │   ├── login.php        # Login API
+│   │   ├── register.php     # Registration API
+│   │   └── logout.php       # Logout API
+│   ├── courses/
+│   │   ├── get-courses.php  # Fetch courses
+│   │   └── enroll.php       # Course enrollment
+│   ├── tests/
+│   │   ├── get-tests.php    # Fetch tests
+│   │   └── submit-test.php  # Submit test results
+│   └── user/
+│       ├── profile.php      # User profile management
+│       └── progress.php     # Progress tracking
+├── database/
+│   └── schema.sql           # Database schema
+└── README.md                # Project documentation
